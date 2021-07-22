@@ -2,6 +2,7 @@ const cvApi = require('./cv-api.js');
 
 const CONFIGS = require('./configs.js');
 const getActiveCaseId = require('./get-active-case-id.js');
+const getCaseTypeCategoryName = require('./get-case-type-category-value.js');
 const getActiveApplicationId = require('./get-active-application-id.js');
 const casesService = require('../data-setup-steps/case.service.js');
 
@@ -23,6 +24,8 @@ function replaceUrlVars (url) {
   const config = CONFIGS.getSiteConfig();
 
   const URL_VAR_REPLACERS = [
+    replaceCasesCTCVar,
+    replaceAwardsCTCVar,
     replaceCaseIdVar,
     replaceApplicationIdVar,
     replaceEmptyCaseIdVar,
@@ -52,6 +55,36 @@ function getRecordIdFromCacheOrCallback (cacheKey, callback) {
   }
 
   return CACHE[cacheKey];
+}
+
+/**
+ * Replaces the `{ctc-cases}` var with the value of the "Cases" Case type category.
+ *
+ * @param {string} url the scenario url.
+ * @param {object} config the site config options.
+ * @returns {string} replaced record id
+ */
+function replaceCasesCTCVar (url, config) {
+  return url.replace(/{ctc-cases}/g, function () {
+    return getRecordIdFromCacheOrCallback('ctc-cases', function () {
+      return getCaseTypeCategoryName('Cases');
+    });
+  });
+}
+
+/**
+ * Replaces the `{ctc-awards}` var with the value of the "awards" Case type category.
+ *
+ * @param {string} url the scenario url.
+ * @param {object} config the site config options.
+ * @returns {string} replaced record id
+ */
+function replaceAwardsCTCVar (url, config) {
+  return url.replace(/{ctc-awards}/g, function () {
+    return getRecordIdFromCacheOrCallback('ctc-awards', function () {
+      return getCaseTypeCategoryName('awards');
+    });
+  });
 }
 
 /**
