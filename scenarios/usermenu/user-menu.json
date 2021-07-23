@@ -1,0 +1,9 @@
+{
+  "scenarios": [
+    {
+      "label": "User Menu - Expanded",
+      "url": "{url}/civicrm/case/a/?case_type_category={ctc-cases}#/case?case_type_category={ctc-cases}&drel=all",
+      "hoverSelector": ".civicrm-usermenu"
+    }
+  ]
+}
