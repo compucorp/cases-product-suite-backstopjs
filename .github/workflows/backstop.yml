@@ -33,6 +33,14 @@ on:
         description: Shoreditch Test Branch/Tag Name
         default: master
         required: true
+      reference_usermenu_branch:
+        description: Usermenu Reference Branch/Tag Name
+        default: master
+        required: true
+      test_usermenu_branch:
+        description: Usermenu Test Branch/Tag Name
+        default: master
+        required: true
 
 jobs:
   run-backstop-tests:
@@ -92,7 +100,8 @@ jobs:
           git clone https://github.com/compucorp/uk.co.compucorp.civicase.git --branch ${{ github.event.inputs.civicase_reference_branch }}
           git clone https://github.com/compucorp/uk.co.compucorp.civiawards --branch ${{ github.event.inputs.civiawards_reference_branch }}
           git clone https://github.com/civicrm/org.civicrm.shoreditch.git --branch ${{ github.event.inputs.reference_shoreditch_branch }}
-          cv en shoreditch civicase civiawards
+          git clone https://github.com/compucorp/uk.co.compucorp.usermenu --branch ${{ github.event.inputs.reference_usermenu_branch }}
+          cv en shoreditch usermenu civicase civiawards
           drush en civicrmtheme -y
           drush en bootstrap -y
           drush vset theme_default bootstrap
@@ -144,7 +153,8 @@ jobs:
           git clone https://github.com/compucorp/uk.co.compucorp.civicase.git --branch ${{ github.event.inputs.civicase_test_branch }}
           git clone https://github.com/compucorp/uk.co.compucorp.civiawards --branch ${{ github.event.inputs.civiawards_test_branch }}
           git clone https://github.com/civicrm/org.civicrm.shoreditch.git --branch ${{ github.event.inputs.test_shoreditch_branch }}
-          cv en shoreditch civicase civiawards
+          git clone https://github.com/compucorp/uk.co.compucorp.usermenu --branch ${{ github.event.inputs.test_usermenu_branch }}
+          cv en shoreditch usermenu civicase civiawards
           drush en civicrmtheme -y
           drush en bootstrap -y
           drush vset theme_default bootstrap
