@@ -1,0 +1,8 @@
+{
+  "scenarios": [
+    {
+      "label": "My Activities Page",
+      "url": "{url}/civicrm/case/a/#/myactivities"
+    }
+  ]
+}
