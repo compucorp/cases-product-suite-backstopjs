@@ -17,6 +17,7 @@ const service = {
 function setupData () {
   createCaseActivities();
   createAwardsActivities();
+  createProspectingActivities();
 
   console.log('Activities data setup successful.');
 }
@@ -93,6 +94,19 @@ function createAwardsActivities () {
     ['custom_' + paymentTypeFieldID]: 1,
     ['custom_' + paymentCurrencyTypeFieldID]: 'USD',
     ['custom_' + paymentAmountValueFieldID]: '5000'
+  });
+}
+
+/**
+ * Create Prospecting Activities
+ */
+function createProspectingActivities () {
+  createUniqueActivity({
+    source_contact_id: contactService.activeContact.id,
+    activity_date_time: moment().startOf('month').format('YYYY-MM-DD'),
+    subject: 'Backstop Follow Up',
+    case_id: caseService.activeProspectingId,
+    activity_type_id: 'Follow up'
   });
 }
 

@@ -6,6 +6,7 @@ const entityTagService = require('./data-setup-steps/entity-tag.service.js');
 const activityService = require('./data-setup-steps/activity.service.js');
 const relationshipService = require('./data-setup-steps/relationship.service.js');
 const awardService = require('./data-setup-steps/award.service.js');
+const prospectService = require('./data-setup-steps/prospect.service.js');
 const awardFinanceManagement = require('./data-setup-steps/award-finance-management.service.js');
 const caseService = require('./data-setup-steps/case.service.js');
 const customGroupService = require('./data-setup-steps/custom-group.service.js');
@@ -35,6 +36,7 @@ async function setupData () {
   tagService.setupData();
   contactService.setupData();
   awardService.setupData();
+  prospectService.setupData();
   awardFinanceManagement.setupData();
   caseService.setupData();
   activityService.setupData();
