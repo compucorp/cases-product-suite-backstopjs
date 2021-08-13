@@ -2,6 +2,7 @@ const _ = require('lodash');
 const createUniqueRecordFactory = require('../utils/create-unique-record-factory.js');
 const caseTypeService = require('./case-type.service.js');
 const awardService = require('./award.service.js');
+const prospectService = require('./prospect.service.js');
 const contactService = require('./contact.service.js');
 const createUniqueCase = createUniqueRecordFactory('Case', ['subject']);
 
@@ -9,9 +10,11 @@ const service = {
   setupData,
   caseSubject: 'Backstop Case',
   awardApplicationSubject: 'Backstop Award Application',
+  prospectingSubject: 'Backstop Prospecting',
   emptyCaseSubject: 'Backstop Empty Case',
   activeCaseID: null,
-  activeAwardApplicationId: null
+  activeAwardApplicationId: null,
+  activeProspectingId: null
 };
 
 /**
@@ -44,6 +47,15 @@ function setupData () {
   );
 
   service.activeAwardApplicationId = awardApplicationIds[0];
+
+  const prospectingIds = createCases(
+    1,
+    service.prospectingSubject,
+    prospectService.prospect,
+    contactService.activeContact
+  );
+
+  service.activeProspectingId = prospectingIds[0];
 
   console.log('Case data setup successful.');
 }

@@ -4,6 +4,7 @@ const CONFIGS = require('./configs.js');
 const getActiveCaseId = require('./get-active-case-id.js');
 const getCaseTypeCategoryName = require('./get-case-type-category-value.js');
 const getActiveApplicationId = require('./get-active-application-id.js');
+const getActiveProspectingId = require('./get-active-prospecting-id');
 const casesService = require('../data-setup-steps/case.service.js');
 
 var CACHE = {
@@ -26,8 +27,10 @@ function replaceUrlVars (url) {
   const URL_VAR_REPLACERS = [
     replaceCasesCTCVar,
     replaceAwardsCTCVar,
+    replaceProspectsCTCVar,
     replaceCaseIdVar,
     replaceApplicationIdVar,
+    replaceProspectingIdVar,
     replaceEmptyCaseIdVar,
     replaceRootUrlVar,
     replaceContactIdVar
@@ -88,6 +91,21 @@ function replaceAwardsCTCVar (url, config) {
 }
 
 /**
+ * Replaces the `{ctc-prospects}` var with the value of the "prospects" Case type category.
+ *
+ * @param {string} url the scenario url.
+ * @param {object} config the site config options.
+ * @returns {string} replaced record id
+ */
+function replaceProspectsCTCVar (url, config) {
+  return url.replace(/{ctc-prospecting}/g, function () {
+    return getRecordIdFromCacheOrCallback('ctc-prospecting', function () {
+      return getCaseTypeCategoryName('prospecting');
+    });
+  });
+}
+
+/**
  * Replaces the `{caseId}` var with the id of the first non deleted, open case.
  *
  * @param {string} url the scenario url.
@@ -112,6 +130,20 @@ function replaceApplicationIdVar (url, config) {
     return getRecordIdFromCacheOrCallback('applicationId', getActiveApplicationId);
   });
 }
+
+/**
+ * Replaces the `{applicationId}` var with the id of the first non deleted, open application.
+ *
+ * @param {string} url the scenario url.
+ * @param {object} config the site config options.
+ * @returns {string} replaced record id
+ */
+function replaceProspectingIdVar (url, config) {
+  return url.replace('{prospectingId}', function () {
+    return getRecordIdFromCacheOrCallback('prospectingId', getActiveProspectingId);
+  });
+}
+
 
 /**
  * Replaces the `{emptyCaseId}` var with the id for the empty case created by the setup script.

@@ -98,7 +98,7 @@
     {
       "label": "Manage Cases - Case Overview - Action Dropdown",
       "url": "{url}/civicrm/case/a/?case_type_category={ctc-cases}#/case/list?cf=%7B\"case_type_category\":\"{ctc-cases}\"%7D&caseId={caseId}",
-      "onReadyScript": "manage-cases/action-dropdown.js"
+      "onReadyScript": "action-dropdown.js"
     },
     {
       "label": "Manage Cases - Case Overview - Action Dropdown - Change case status",

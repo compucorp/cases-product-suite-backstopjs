@@ -1,0 +1,22 @@
+{
+  "scenarios": [
+    {
+      "label": "Manage Prospects - Case Overview - Case Action Menu",
+      "url": "{url}/civicrm/case/a/?case_type_category={ctc-prospecting}#/case/list?cf=%7B\"case_type_category\":\"{ctc-prospecting}\"%7D&caseId={prospectingId}",
+      "waitForLoadingComplete": ".civicase__summary-tab",
+      "clickSelector": ".civicase__case-header__action-icon"
+    },
+    {
+      "label": "Manage Prospects - Case Overview - Action Dropdown - Convert to Pledge",
+      "url": "{url}/civicrm/case/a/?case_type_category={ctc-prospecting}#/case/list?cf=%7B\"case_type_category\":\"{ctc-prospecting}\"%7D&caseId={prospectingId}",
+      "waitForLoadingComplete": ".civicase__summary-tab",
+      "onReadyScript": "manage-prospectings/click-pledge-button.js"
+    },
+    {
+      "label": "Manage Prospects - Case Overview - Action Dropdown - Convert to Contribution",
+      "url": "{url}/civicrm/case/a/?case_type_category={ctc-prospecting}#/case/list?cf=%7B\"case_type_category\":\"{ctc-prospecting}\"%7D&caseId={prospectingId}",
+      "waitForLoadingComplete": ".civicase__summary-tab",
+      "onReadyScript": "manage-prospectings/click-contribution-button.js"
+    }
+  ]
+}
